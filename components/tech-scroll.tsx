@@ -1,28 +1,18 @@
 "use client"
 
 import { motion } from "framer-motion"
-import {
-  SiReact,
-  SiNextdotjs,
-  SiTypescript,
-  SiJavascript,
-  SiTailwindcss,
-  SiNodedotjs,
-  SiMongodb,
-  SiExpress,
-  SiNestjs,
-} from "react-icons/si"
+import { Code2, FileCode2, Database, Layout, Server, Terminal, Cpu, Globe, Box } from "lucide-react"
 
 const techIcons = [
-  { Icon: SiReact, name: "React", color: "#61DAFB" },
-  { Icon: SiNextdotjs, name: "Next.js", color: "#000000" },
-  { Icon: SiTypescript, name: "TypeScript", color: "#3178C6" },
-  { Icon: SiJavascript, name: "JavaScript", color: "#F7DF1E" },
-  { Icon: SiTailwindcss, name: "Tailwind CSS", color: "#06B6D4" },
-  { Icon: SiNodedotjs, name: "Node.js", color: "#339933" },
-  { Icon: SiMongodb, name: "MongoDB", color: "#47A248" },
-  { Icon: SiExpress, name: "Express", color: "#666666" },
-  { Icon: SiNestjs, name: "Nest.js", color: "#666666" },
+  { Icon: Code2, name: "React", color: "#61DAFB" },
+  { Icon: FileCode2, name: "Next.js", color: "#000000" },
+  { Icon: Terminal, name: "TypeScript", color: "#3178C6" },
+  { Icon: Globe, name: "JavaScript", color: "#F7DF1E" },
+  { Icon: Layout, name: "Tailwind CSS", color: "#06B6D4" },
+  { Icon: Server, name: "Node.js", color: "#339933" },
+  { Icon: Database, name: "MongoDB", color: "#47A248" },
+  { Icon: Box, name: "Express", color: "#000000" },
+  { Icon: Cpu, name: "Nest.js", color: "#E0234E" },
 ]
 
 export function TechScroll() {
