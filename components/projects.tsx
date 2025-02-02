@@ -1,10 +1,10 @@
-"use client";
+"use client"
 
-import { motion } from "framer-motion";
-import { CardHoverEffect } from "../components/card-hover-effect";
-import { Badge } from "@/components/ui/badge";
-import Link from "next/link";
-import { Github, ExternalLink, ArrowUp } from "lucide-react";
+import { motion } from "framer-motion"
+import { CardHoverEffect } from "../components/card-hover-effect"
+import { Badge } from "@/components/ui/badge"
+import Link from "next/link"
+import { Github, ExternalLink, ArrowUp } from "lucide-react"
 
 const projects = [
   {
@@ -35,7 +35,7 @@ const projects = [
     techStack: ["TypeScript", "Node.js", "GeoIP", "Express", "MongoDB"],
     github: "https://github.com/SahilSuman1011/url-shortener",
   },
-];
+]
 
 export function Projects() {
   return (
@@ -62,7 +62,6 @@ export function Projects() {
                   <div className="flex items-center justify-between">
                     <h3 className="text-lg font-semibold">{project.title}</h3>
                     <div className="flex gap-2">
-                      {/* Only show ExternalLink icon for first two projects */}
                       {project.demo && i < 2 && (
                         <a
                           href={project.demo}
@@ -73,7 +72,6 @@ export function Projects() {
                           <ExternalLink className="w-4 h-4" />
                         </a>
                       )}
-                      {/* Only show Github icon for the last two projects */}
                       {project.github && i >= 2 && (
                         <a
                           href={project.github}
@@ -86,10 +84,10 @@ export function Projects() {
                       )}
                     </div>
                   </div>
-                  <p className="text-sm text-black-400">{project.description}</p>
+                  <p className="text-sm text-muted-foreground">{project.description}</p>
                   <div className="flex flex-wrap gap-2">
                     {project.techStack.map((tech) => (
-                      <Badge key={tech} variant="secondary" className="bg-white/5 text-xs hover:bg-white/10">
+                      <Badge key={tech} variant="secondary" className="bg-secondary/50 text-xs hover:bg-secondary/80">
                         {tech}
                       </Badge>
                     ))}
@@ -104,7 +102,7 @@ export function Projects() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 px-4 py-2 text-white bg-black rounded-2xl shadow-md hover:bg-gray-800"
+              className="flex items-center gap-2 px-4 py-2 text-white bg-primary rounded-2xl shadow-md hover:bg-primary/80"
             >
               View More <ArrowUp className="w-4 h-4" />
             </motion.button>
@@ -112,6 +110,6 @@ export function Projects() {
         </div>
       </div>
     </section>
-  );
+  )
 }
 
