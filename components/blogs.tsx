@@ -22,7 +22,12 @@ export function Blogs() {
     const fetchBlogs = async () => {
       try {
         setIsLoading(true)
-        const response = await fetch("/api/medium-blogs")
+        const response = await fetch("/api/medium-blogs", {
+          cache: "no-store",
+          headers: {
+            "Cache-Control": "no-cache",
+          },
+        })
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)
         }
@@ -53,9 +58,15 @@ export function Blogs() {
         <div className="grid gap-4 md:grid-cols-3">
           <div className="md:col-span-2 space-y-4">
             {isLoading ? (
-              <p>Loading blogs...</p>
+              <div className="animate-pulse space-y-4">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="bg-muted rounded-lg p-4 h-32" />
+                ))}
+              </div>
             ) : error ? (
-              <p className="text-red-500">{error}</p>
+              <p className="text-destructive">{error}</p>
+            ) : blogs.length === 0 ? (
+              <p className="text-muted-foreground">No blogs found.</p>
             ) : (
               <div className="space-y-4">
                 {blogs.map((blog, i) => (
@@ -68,8 +79,8 @@ export function Blogs() {
                     <CardHoverEffect>
                       <Link href={blog.link} target="_blank" rel="noopener noreferrer" className="block p-4 space-y-3">
                         <h3 className="text-lg font-semibold">{blog.title}</h3>
-                        <p className="text-sm text-black-400">{new Date(blog.pubDate).toLocaleDateString()}</p>
-                        <div className="flex items-center text-[#0ea5e9]">
+                        <p className="text-sm text-muted-foreground">{new Date(blog.pubDate).toLocaleDateString()}</p>
+                        <div className="flex items-center text-primary">
                           <span className="text-sm">Read more</span>
                           <ArrowUpRight className="w-4 h-4 ml-1" />
                         </div>
@@ -84,7 +95,7 @@ export function Blogs() {
                 href="https://hashnode.com/@SahilSuman11"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center text-[#0ea5e9] hover:underline"
+                className="inline-flex items-center text-primary hover:text-primary/80 transition-colors"
               >
                 View all posts
                 <ArrowUpRight className="w-4 h-4 ml-1" />

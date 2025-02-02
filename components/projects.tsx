@@ -5,6 +5,7 @@ import { CardHoverEffect } from "../components/card-hover-effect"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import { Github, ExternalLink, ArrowUp } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 const projects = [
   {
@@ -62,6 +63,7 @@ export function Projects() {
                   <div className="flex items-center justify-between">
                     <h3 className="text-lg font-semibold">{project.title}</h3>
                     <div className="flex gap-2">
+                      {/* Only show ExternalLink icon for first two projects */}
                       {project.demo && i < 2 && (
                         <a
                           href={project.demo}
@@ -72,6 +74,7 @@ export function Projects() {
                           <ExternalLink className="w-4 h-4" />
                         </a>
                       )}
+                      {/* Only show Github icon for the last two projects */}
                       {project.github && i >= 2 && (
                         <a
                           href={project.github}
@@ -84,10 +87,10 @@ export function Projects() {
                       )}
                     </div>
                   </div>
-                  <p className="text-sm text-muted-foreground">{project.description}</p>
+                  <p className="text-sm text-black-400">{project.description}</p>
                   <div className="flex flex-wrap gap-2">
                     {project.techStack.map((tech) => (
-                      <Badge key={tech} variant="secondary" className="bg-secondary/50 text-xs hover:bg-secondary/80">
+                      <Badge key={tech} variant="secondary" className="bg-white/5 text-xs hover:bg-white/10">
                         {tech}
                       </Badge>
                     ))}
@@ -97,15 +100,17 @@ export function Projects() {
             </motion.div>
           ))}
         </div>
-        <div className="flex justify-center mt-4">
-          <Link href="https://github.com/SahilSuman1011">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 px-4 py-2 text-white bg-primary rounded-2xl shadow-md hover:bg-primary/80"
+        <div className="flex justify-center mt-8">
+          <Link href="https://github.com/SahilSuman1011" target="_blank" rel="noopener noreferrer">
+            <Button
+              variant="outline"
+              className="group relative px-4 py-2 rounded-full overflow-hidden bg-background border border-primary/20 hover:border-primary/50 transition-colors"
             >
-              View More <ArrowUp className="w-4 h-4" />
-            </motion.button>
+              <span className="relative z-10 flex items-center gap-2">
+                View More <ArrowUp className="w-4 h-4 transition-transform group-hover:-translate-y-1" />
+              </span>
+              <div className="absolute inset-0 bg-primary/10 dark:bg-primary/20 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform" />
+            </Button>
           </Link>
         </div>
       </div>
