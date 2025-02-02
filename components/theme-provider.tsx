@@ -1,23 +1,9 @@
 "use client"
 
 import * as React from "react"
-import { ThemeProvider as NextThemesProvider } from "next-themes"
+import { ThemeProvider as NextThemesProvider, type ThemeProviderProps as NextThemeProviderProps } from "next-themes"
 
-interface Props {
-  children: React.ReactNode
-  attribute?: string
-  defaultTheme?: string
-  enableSystem?: boolean
-  disableTransitionOnChange?: boolean
-}
-
-export function ThemeProvider({
-  children,
-  attribute = "class",
-  defaultTheme = "system",
-  enableSystem = true,
-  disableTransitionOnChange = false,
-}: Props) {
+export function ThemeProvider({ children, ...props }: NextThemeProviderProps) {
   const [mounted, setMounted] = React.useState(false)
 
   React.useEffect(() => {
@@ -25,19 +11,10 @@ export function ThemeProvider({
   }, [])
 
   if (!mounted) {
-    return null
+    return <>{children}</>
   }
 
-  return (
-    <NextThemesProvider
-      attribute={attribute}
-      defaultTheme={defaultTheme}
-      enableSystem={enableSystem}
-      disableTransitionOnChange={disableTransitionOnChange}
-    >
-      <div className="theme-transition">{children}</div>
-    </NextThemesProvider>
-  )
+  return <NextThemesProvider {...props}>{children}</NextThemesProvider>
 }
 
 export { useTheme } from "next-themes"
