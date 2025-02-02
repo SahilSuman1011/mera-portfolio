@@ -11,11 +11,7 @@ export function Footer() {
                   Home
                 </a>
               </li>
-              <li>
-                <a href="#blog" className="hover:text-[#0ea5e9]">
-                  Blog
-                </a>
-              </li>
+           
               <li>
                 <a href="#projects" className="hover:text-[#0ea5e9]">
                   Projects
