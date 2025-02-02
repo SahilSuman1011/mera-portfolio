@@ -17,7 +17,8 @@
     "tailwind-merge": "^2.0.0",
     "framer-motion": "^10.16.4",
     "lucide-react": "^0.292.0",
-    "class-variance-authority": "^0.7.0"
+    "class-variance-authority": "^0.7.0",
+    "@radix-ui/react-slot": "^1.0.2"
   },
   "devDependencies": {
     "@types/node": "^20",
