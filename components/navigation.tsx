@@ -20,29 +20,48 @@ export function Navigation() {
   React.useEffect(() => {
     const handleScroll = () => {
       const sections = document.querySelectorAll("section[id]")
-      const scrollPosition = window.scrollY + window.innerHeight
+      const scrollPosition = window.scrollY
+      const viewportHeight = window.innerHeight
+      const buffer = 100 // Buffer zone for better detection
 
-      // Check if we've scrolled to the bottom of the page
-      const isAtBottom = window.innerHeight + Math.round(window.scrollY) >= document.documentElement.scrollHeight
+      // Check if we're at the top of the page
+      if (scrollPosition < viewportHeight / 3) {
+        setActive("home")
+        return
+      }
 
-      if (isAtBottom) {
-        // If at bottom, activate the last section (Contact)
+      // Check if we're at the bottom of the page
+      if (window.innerHeight + Math.round(window.scrollY) >= document.documentElement.scrollHeight - buffer) {
         setActive("contact")
         return
       }
 
+      // Find the current section
+      let currentSection = ""
       sections.forEach((section) => {
         if (!section) return
-        const sectionTop = (section as HTMLElement).offsetTop
-        const sectionHeight = (section as HTMLElement).offsetHeight
+        const sectionTop = (section as HTMLElement).offsetTop - buffer
+        const sectionBottom = sectionTop + (section as HTMLElement).offsetHeight
         const sectionId = section.getAttribute("id")
 
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight && sectionId) {
-          setActive(sectionId)
+        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom && sectionId) {
+          // Check if more than half of the section is visible
+          const sectionMiddle = sectionTop + (section as HTMLElement).offsetHeight / 2
+          if (scrollPosition <= sectionMiddle) {
+            currentSection = sectionId
+          }
         }
       })
+
+      if (currentSection) {
+        setActive(currentSection)
+      }
     }
 
+    // Initial check
+    handleScroll()
+
+    // Add scroll listener
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
