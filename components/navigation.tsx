@@ -20,7 +20,16 @@ export function Navigation() {
   React.useEffect(() => {
     const handleScroll = () => {
       const sections = document.querySelectorAll("section[id]")
-      const scrollPosition = window.scrollY + 100
+      const scrollPosition = window.scrollY + window.innerHeight
+
+      // Check if we've scrolled to the bottom of the page
+      const isAtBottom = window.innerHeight + Math.round(window.scrollY) >= document.documentElement.scrollHeight
+
+      if (isAtBottom) {
+        // If at bottom, activate the last section (Contact)
+        setActive("contact")
+        return
+      }
 
       sections.forEach((section) => {
         if (!section) return
@@ -40,21 +49,21 @@ export function Navigation() {
 
   return (
     <motion.header
-      className="sticky top-0 z-50 w-full border-b border-zinc-200 bg-white/80 backdrop-blur-md dark:border-zinc-800 dark:bg-black/80"
+      className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-md"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="mx-auto flex h-16 max-w-screen-md items-center justify-between px-8">
+      <div className="mx-auto flex h-16 max-w-screen-md items-center justify-between px-4 sm:px-6 lg:px-8">
         <button
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          className="relative h-9 w-9 rounded-full bg-zinc-100 p-2 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700"
+          className="relative h-9 w-9 rounded-full bg-muted p-2 hover:bg-muted/80 transition-colors"
         >
-          <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 text-zinc-800 dark:text-zinc-200" />
-          <Moon className="absolute top-2.5 left-2.5 h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100 text-zinc-800 dark:text-zinc-200" />
+          <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+          <Moon className="absolute top-2.5 left-2.5 h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
           <span className="sr-only">Toggle theme</span>
         </button>
-        <nav className="flex items-center rounded-full bg-zinc-100/50 p-1 backdrop-blur-md dark:bg-zinc-800/50">
+        <nav className="flex items-center space-x-0.5 sm:space-x-2">
           {navItems.map((link) => (
             <a
               key={link.href}
@@ -67,16 +76,16 @@ export function Navigation() {
                 }
                 setActive(link.href.replace("#", ""))
               }}
-              className={`relative rounded-full px-4 py-2 text-sm transition-colors ${
+              className={`relative rounded-full px-1.5 py-1 text-xs transition-colors sm:px-3 sm:py-2 sm:text-sm ${
                 active === link.href.replace("#", "")
-                  ? "text-zinc-900 dark:text-zinc-100"
-                  : "text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-foreground"
               }`}
             >
               {active === link.href.replace("#", "") && (
                 <motion.div
                   layoutId="active-pill"
-                  className="absolute inset-0 rounded-full bg-white dark:bg-zinc-800"
+                  className="absolute inset-0 rounded-full bg-muted"
                   transition={{ type: "spring", duration: 0.5 }}
                 />
               )}
