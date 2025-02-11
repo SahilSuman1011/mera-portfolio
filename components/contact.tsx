@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { motion } from "framer-motion"
 import { BackgroundGradient } from "../components/background-gradient"
 import { WhatsappIcon } from "../components/icons"
 
@@ -22,12 +21,12 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="py-12 bg-white text-black dark:bg-[#0a0a0a] dark:text-zinc-400 transition-colors duration-300"
+      className="py-4 bg-white text-black dark:bg-[#0a0a0a] dark:text-zinc-400 transition-colors duration-300"
     >
       <div className="container max-w-3xl space-y-8">
         <div className="space-y-4">
-          <h2 className="text-2xl font-bold">Want to hire me as a freelancer? &apos; Lets discuss.</h2>
-          <p>Drop your message and &apos; lets discuss about your project.</p>
+          <h2 className="text-2xl font-bold">Want to hire me as a freelancer? Lets discuss.</h2>
+          <p>Drop your message and lets discuss about your project.</p>
 
           <BackgroundGradient className="inline-block rounded-full" containerClassName="inline-block">
             <a

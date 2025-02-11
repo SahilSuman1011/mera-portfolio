@@ -1,13 +1,12 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 
 export function Hero() {
   return (
-    <div className="container max-w-3xl pt-16 pb-8">
+    <div className="container max-w-3xl py-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -25,8 +24,7 @@ export function Hero() {
             <div>
               <h1 className="text-4xl font-bold">Sahil Suman</h1>
               <p className="text-lg font-light">Full stack Developer</p>
-              <p className="text-sm">
-              Building Scalable and Production ready Softwares.</p>
+              <p className="text-sm">Building Scalable and Production ready Softwares.</p>
             </div>
             <Link
               href="https://drive.google.com/file/d/1_cjj-6DLVoNISIf_Shd6kSkZRqzf8RxQ/view?usp=sharing"
@@ -57,7 +55,6 @@ export function Hero() {
             >
               LinkedIn
             </Link>{" "}
-            
             for updates.
           </p>
         </div>

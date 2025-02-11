@@ -40,7 +40,7 @@ const projects = [
 
 export function Projects() {
   return (
-    <section id="projects" className="py-8">
+    <section id="projects" className="py-4">
       <div className="container max-w-3xl space-y-6">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -58,39 +58,37 @@ export function Projects() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
             >
-              <CardHoverEffect>
+              <CardHoverEffect className="border border-primary/20">
                 <div className="p-4 space-y-3">
                   <div className="flex items-center justify-between">
                     <h3 className="text-lg font-semibold">{project.title}</h3>
                     <div className="flex gap-2">
-                      {/* Only show ExternalLink icon for first two projects */}
                       {project.demo && i < 2 && (
                         <a
                           href={project.demo}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-1 rounded-full hover:bg-white/10"
+                          className="p-1 rounded-full hover:bg-muted/50"
                         >
                           <ExternalLink className="w-4 h-4" />
                         </a>
                       )}
-                      {/* Only show Github icon for the last two projects */}
                       {project.github && i >= 2 && (
                         <a
                           href={project.github}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-1 rounded-full hover:bg-white/10"
+                          className="p-1 rounded-full hover:bg-muted/50"
                         >
                           <Github className="w-4 h-4" />
                         </a>
                       )}
                     </div>
                   </div>
-                  <p className="text-sm text-black-400">{project.description}</p>
+                  <p className="text-sm text-muted-foreground">{project.description}</p>
                   <div className="flex flex-wrap gap-2">
                     {project.techStack.map((tech) => (
-                      <Badge key={tech} variant="secondary" className="bg-white/5 text-xs hover:bg-white/10">
+                      <Badge key={tech} variant="secondary" className="bg-muted/50 text-xs hover:bg-muted">
                         {tech}
                       </Badge>
                     ))}
