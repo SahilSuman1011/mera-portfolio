@@ -14,28 +14,29 @@ interface Blog {
 }
 
 export function Blogs() {
+  const [mounted, setMounted] = useState(false)
   const [blogs, setBlogs] = useState<Blog[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
+    setMounted(true)
     const fetchBlogs = async () => {
       try {
         setIsLoading(true)
-        const response = await fetch("/api/medium-blogs", {
-          cache: "no-store",
-          headers: {
-            "Cache-Control": "no-cache",
-          },
-        })
+        const response = await fetch("/api/medium-blogs")
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)
         }
         const data = await response.json()
         setBlogs(data.items?.slice(0, 3) || [])
-      } catch (error) {
-        console.error("Error fetching blogs:", error)
-        setError("Failed to fetch blogs. Please try again later.")
+      } catch (err: unknown) {
+        console.error("Error fetching blogs:", err)
+        if (err instanceof Error) {
+          setError("Failed to fetch blogs. " + err.message)
+        } else {
+          setError("Failed to fetch blogs. Unknown error")
+        }
       } finally {
         setIsLoading(false)
       }
@@ -43,6 +44,11 @@ export function Blogs() {
 
     fetchBlogs()
   }, [])
+
+  // Avoid rendering until after mount to prevent hydration mismatches
+  if (!mounted) {
+    return null
+  }
 
   return (
     <section id="blogs" className="py-4">
@@ -77,9 +83,16 @@ export function Blogs() {
                     transition={{ delay: i * 0.1 }}
                   >
                     <CardHoverEffect>
-                      <Link href={blog.link} target="_blank" rel="noopener noreferrer" className="block p-4 space-y-3">
+                      <Link
+                        href={blog.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block p-4 space-y-3"
+                      >
                         <h3 className="text-lg font-semibold">{blog.title}</h3>
-                        <p className="text-sm text-muted-foreground">{new Date(blog.pubDate).toLocaleDateString()}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {new Date(blog.pubDate).toLocaleDateString()}
+                        </p>
                         <div className="flex items-center text-primary">
                           <span className="text-sm">Read more</span>
                           <ArrowUpRight className="w-4 h-4 ml-1" />
@@ -110,4 +123,3 @@ export function Blogs() {
     </section>
   )
 }
-

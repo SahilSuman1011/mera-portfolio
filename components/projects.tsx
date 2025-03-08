@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import { Github, ExternalLink, ArrowUp } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Image from "next/image"
 
 const projects = [
   {
@@ -14,6 +15,20 @@ const projects = [
       "An Edtech Platform with course management and learning features. Complete platform for online education with course creation, enrollment, and learning management.",
     techStack: ["React", "Node.js", "MongoDB", "Express", "Tailwind CSS"],
     demo: "https://studynotion-frontend.vercel.app/",
+    github: "https://github.com/SahilSuman1011/StudyNotion",
+    image:
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-03-09%20003015-fnAA10GYsFxFv1TBOU4FLH4COvcPjx.png",
+  },
+  
+  {
+    title: "Promptopia",
+    description:
+      "A AI Prompt Sharing Application along with a comprehensive CRUD AI Prompt sharing system utilizing a MongoDB database and implementing Google Next-Auth authentication.",
+    techStack: ["Next.js", "Tailwind CSS", "Next-Auth", "MongoDB"],
+    demo: "https://promptopia-prompt-sharing-project.vercel.app/",
+    github: "https://github.com/SahilSuman1011/Promptopia",
+    image:
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-03-09%20003056-Hq7sKZcKBe8M4idlazyArCeKOozK1w.png",
   },
   {
     title: "AutoComm",
@@ -21,20 +36,19 @@ const projects = [
       "Community Engagement Platform with real-time chat and AI integration. Built for seamless communication and automated responses using advanced AI.",
     techStack: ["Next.js", "Kestra", "MongoDB", "Clerk", "Tailwind CSS"],
     demo: "https://kestra-autocomm.vercel.app/",
+    github: "https://github.com/SahilSuman1011/kestra-hackfrost-24",
+    image:
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-03-09%20003037-jjYVLrTg1TKE64jServj3FXNQedpfV.png",
   },
   {
-    title: "Personal Expense Tracker",
+    title: "Polygon Mapper App",
     description:
-      "Full-stack Application to Track Personal expenses, able to Export expenses to CSV with Advanced filtering and search with Real-time updates",
-    techStack: ["React", "FastAPI", "Shadcn UI", "Tailwind", "SQLAlchemy"],
-    github: "https://github.com/SahilSuman1011/Expense-Tracker-Project",
-  },
-  {
-    title: "URL Shortener API",
-    description:
-      "URL shortening service with analytics tracking. Features include custom short URLs, click tracking, and geographic analytics using GeoIP.",
-    techStack: ["TypeScript", "Node.js", "GeoIP", "Express", "MongoDB"],
-    github: "https://github.com/SahilSuman1011/url-shortener",
+      "An Interactive mapping application using React 18, OpenLayers, and Tailwind CSS, enabling users to create, edit, and delete polygons with an intuitive UI.",
+    techStack: ["React", "React Router", "Openlayers", "Tailwind CSS"],
+    github: "https://github.com/SahilSuman1011/Polygon-mapper-main",
+    demo: "https://polygon-mapper-main.vercel.app/",
+    image:
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-03-09%20010720-jHnj5SrAj3zuRqivyQQrCK3JNMPXW1.png",
   },
 ]
 
@@ -59,39 +73,54 @@ export function Projects() {
               transition={{ delay: i * 0.1 }}
             >
               <CardHoverEffect className="border border-primary/20">
-                <div className="p-4 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-semibold">{project.title}</h3>
-                    <div className="flex gap-2">
-                      {project.demo && i < 2 && (
-                        <a
-                          href={project.demo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-1 rounded-full hover:bg-muted/50"
-                        >
-                          <ExternalLink className="w-4 h-4" />
-                        </a>
-                      )}
-                      {project.github && i >= 2 && (
+                <div className="group relative">
+                  {/* Image Container with Hover Effect */}
+                  <div className="relative h-48 w-full overflow-hidden rounded-t-xl">
+                    <Image
+                      src={project.image || "/placeholder.svg"}
+                      alt={project.title}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-110"
+                    />
+                    {/* Overlay on Hover */}
+                    <div className="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    {/* Links that appear on hover */}
+                    <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                      {project.github && (
                         <a
                           href={project.github}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-1 rounded-full hover:bg-muted/50"
+                          className="rounded-full bg-white/10 p-2 backdrop-blur-sm transition-colors hover:bg-white/20"
+                          aria-label={`GitHub repository for ${project.title}`}
                         >
-                          <Github className="w-4 h-4" />
+                          <Github className="h-6 w-6 text-white" />
+                        </a>
+                      )}
+                      {project.demo && (
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="rounded-full bg-white/10 p-2 backdrop-blur-sm transition-colors hover:bg-white/20"
+                          aria-label={`Live demo for ${project.title}`}
+                        >
+                          <ExternalLink className="h-6 w-6 text-white" />
                         </a>
                       )}
                     </div>
                   </div>
-                  <p className="text-sm text-muted-foreground">{project.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.techStack.map((tech) => (
-                      <Badge key={tech} variant="secondary" className="bg-muted/50 text-xs hover:bg-muted">
-                        {tech}
-                      </Badge>
-                    ))}
+                  {/* Content */}
+                  <div className="p-4 space-y-3">
+                    <h3 className="text-lg font-semibold">{project.title}</h3>
+                    <p className="text-sm text-muted-foreground">{project.description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.techStack.map((tech) => (
+                        <Badge key={tech} variant="secondary" className="bg-muted/50 text-xs hover:bg-muted">
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </CardHoverEffect>

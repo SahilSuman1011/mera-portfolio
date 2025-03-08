@@ -12,7 +12,6 @@ export async function GET() {
           Accept: "application/json",
         },
         cache: "no-store",
-        next: { revalidate: 0 },
       },
     )
 
@@ -38,4 +37,3 @@ export async function GET() {
     return NextResponse.json({ error: "Failed to fetch blogs", details: errorMessage }, { status: 500 })
   }
 }
-
