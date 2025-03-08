@@ -23,7 +23,7 @@ const projects = [
   {
     title: "Promptopia",
     description:
-      "A AI Prompt Sharing Application along with a comprehensive CRUD AI Prompt sharing system utilizing a MongoDB database and implementing Google Next-Auth authentication.",
+      "An AI Prompt Sharing Application along with a comprehensive CRUD AI Prompt sharing system utilizing a MongoDB database and implementing Google Next-Auth authentication.",
     techStack: ["Next.js", "Tailwind CSS", "Next-Auth", "MongoDB"],
     demo: "https://promptopia-prompt-sharing-project.vercel.app/",
     github: "https://github.com/SahilSuman1011/Promptopia",
